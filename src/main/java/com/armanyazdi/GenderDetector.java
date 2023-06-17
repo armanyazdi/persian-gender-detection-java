@@ -54,9 +54,11 @@ public class GenderDetector {
         boolean doExists = false;
         String firstName =  null;
         String clearedName = clearName(name);
-        List<String> fullName = List.of(clearedName.split(" "));
+        List<String> fullName = new ArrayList<>(List.of(clearedName.split(" ")));
+        List<String> prefixes = Arrays.asList("سید", "استاد", "دکتر", "مهندس", "خانم");
 
         readCSV("names.csv");
+        if (prefixes.contains(fullName.get(0))) fullName.remove(0);
 
         for (String s : allFirstNames) {
             if (fullName.size() == 1) {
