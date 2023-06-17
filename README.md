@@ -1,6 +1,6 @@
-# Persian Gender Detector
+# Persian Gender Detection
 
-A Java library for detecting gender by Persian and Arabic names (with more than 20K names).
+A Java library for detecting gender by Persian and Arabic names (with more than 23K names).
 
 ## Installation
 
@@ -26,6 +26,10 @@ GenderDetector.getGender("پانته‌آ عَبّاسی");   // FEMALE
 GenderDetector.getGender("دکتر رزا حسینی"); // FEMALE
 GenderDetector.getGender("سید امیر موسوی"); // MALE
 ```
+
+## TODO
+
+- [ ] Add Finglish support
 
 ## License
 
