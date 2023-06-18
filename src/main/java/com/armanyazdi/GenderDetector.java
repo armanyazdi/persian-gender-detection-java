@@ -44,6 +44,7 @@ public class GenderDetector {
         matcher.reset();
 
         return matcher.replaceAll("").trim()
+                .replace("\u200c", " ")
                 .replace("آ", "ا")
                 .replace("ي", "ی")
                 .replace("ك", "ک")
@@ -71,6 +72,7 @@ public class GenderDetector {
                 if (s.equals(String.join(" ", fullName.get(0), fullName.get(1)))) {
                     firstName = String.join(" ", fullName.get(0), fullName.get(1));
                     doExists = true;
+                    break;
                 }
                 else if (s.equals(fullName.get(0))) {
                     firstName = fullName.get(0);
@@ -81,10 +83,12 @@ public class GenderDetector {
                 if (s.equals(String.join(" ", fullName.get(0), fullName.get(1), fullName.get(2)))) {
                     firstName = String.join(" ", fullName.get(0), fullName.get(1), fullName.get(2));
                     doExists = true;
+                    break;
                 }
                 else if (s.equals(String.join(" ", fullName.get(0), fullName.get(1)))) {
                     firstName = String.join(" ", fullName.get(0), fullName.get(1));
                     doExists = true;
+                    break;
                 }
                 else if (s.equals(fullName.get(0))) {
                     firstName = fullName.get(0);
