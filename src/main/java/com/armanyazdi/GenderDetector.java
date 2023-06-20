@@ -32,8 +32,7 @@ public class GenderDetector {
                 allFirstNames.add(record.get(0));
                 allGenders.add(record.get(1));
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -52,52 +51,25 @@ public class GenderDetector {
     }
 
     public static String getGender(String name) {
-        boolean doExists = false;
-        String firstName =  null;
+        String firstName = null;
         String clearedName = clearName(name);
         List<String> fullName = new ArrayList<>(List.of(clearedName.split(" ")));
         List<String> prefixes = Arrays.asList("سید", "سیده", "استاد", "دکتر", "مهندس", "سرکار");
 
-        readCSV("names.csv");
         while (prefixes.contains(fullName.get(0))) fullName.remove(0);
+        readCSV("names.csv");
 
-        for (String s : allFirstNames) {
-            if (fullName.size() == 1) {
-                if (s.equals(fullName.get(0))) {
-                    firstName = fullName.get(0);
-                    doExists = true;
-                }
-            }
-            else if (fullName.size() == 2) {
-                if (s.equals(String.join(" ", fullName.get(0), fullName.get(1)))) {
-                    firstName = String.join(" ", fullName.get(0), fullName.get(1));
-                    doExists = true;
-                    break;
-                }
-                else if (s.equals(fullName.get(0))) {
-                    firstName = fullName.get(0);
-                    doExists = true;
-                }
-            }
-            else {
-                if (s.equals(String.join(" ", fullName.get(0), fullName.get(1), fullName.get(2)))) {
-                    firstName = String.join(" ", fullName.get(0), fullName.get(1), fullName.get(2));
-                    doExists = true;
-                    break;
-                }
-                else if (s.equals(String.join(" ", fullName.get(0), fullName.get(1)))) {
-                    firstName = String.join(" ", fullName.get(0), fullName.get(1));
-                    doExists = true;
-                    break;
-                }
-                else if (s.equals(fullName.get(0))) {
-                    firstName = fullName.get(0);
-                    doExists = true;
+        outerloop:
+        for (int i = 0; i < fullName.size(); fullName.remove(fullName.size() - 1)) {
+            for (String s : allFirstNames) {
+                if (s.equals(String.join(" ", fullName))) {
+                    firstName = String.join(" ", fullName);
+                    break outerloop;
                 }
             }
         }
 
-        if (doExists)
+        if (allFirstNames.contains(firstName))
             switch (allGenders.get(allFirstNames.indexOf(firstName))) {
                 case "M" -> {return "MALE";}
                 case "F" -> {return "FEMALE";}
