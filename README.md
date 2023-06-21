@@ -8,7 +8,7 @@ A Java library for detecting gender by Persian and Arabic names (with more than 
 
 ## Usage
 
-Let's take a look at what an example test case would look like using `persian-gender-detector`.
+Let's take a look at what an example test case would look like using `persian-gender-detection`.
 
 ### Detect Gender:
 
@@ -27,10 +27,20 @@ GenderDetector.getGender("دکتر رزا حسینی"); // FEMALE
 GenderDetector.getGender("سید امیر موسوی"); // MALE
 ```
 
+Issues
+------
+
+Feel free to submit issues and enhancement requests.
+
+Contributing
+------------
+
+Feel free to contribute names database with your kindly pull requests.
+
 ## TODO
 
 - [ ] Add Finglish support
 
 ## License
 
-`persian-gender-detector` is available under the [MIT license](https://github.com/armanyazdi/persian-gender-detection/blob/master/LICENSE).
+`persian-gender-detection` is available under the [MIT license](https://github.com/armanyazdi/persian-gender-detection/blob/master/LICENSE).
