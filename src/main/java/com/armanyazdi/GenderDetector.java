@@ -5,33 +5,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GenderDetector {
-    private static final List<List<String>> allRecords = new ArrayList<>();
-    private static final List<String> allFirstNames = new ArrayList<>();
-    private static final List<String> allGenders = new ArrayList<>();
+    private static final HashMap<String, String> dataset = new HashMap<>();
 
-    private static void readCSV(String file) {
-        allRecords.clear();
-        allFirstNames.clear();
-        allGenders.clear();
+    private static void readCSV() {
+        List<List<String>> records = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/".concat(file)))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/names.csv"))) {
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.split(",");
-                allRecords.add(Arrays.asList(values));
-            }
+            while ((line = reader.readLine()) != null)
+                records.add(Arrays.asList(line.split(",")));
 
-            reader.close();
+            for (List<String> record : records)
+                dataset.put(record.get(0), record.get(1));
 
-            for (List<String> record : allRecords) {
-                allFirstNames.add(record.get(0));
-                allGenders.add(record.get(1));
-            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,20 +49,20 @@ public class GenderDetector {
         List<String> prefixes = Arrays.asList("سید", "سیده", "استاد", "دکتر", "مهندس", "سرکار");
 
         while (prefixes.contains(fullName.get(0))) fullName.remove(0);
-        readCSV("names.csv");
+        readCSV();
 
         outerloop:
         for (int i = 0; i < fullName.size(); fullName.remove(fullName.size() - 1)) {
-            for (String s : allFirstNames) {
-                if (s.equals(String.join(" ", fullName))) {
+            for (String key : dataset.keySet()) {
+                if (key.equals(String.join(" ", fullName))) {
                     firstName = String.join(" ", fullName);
                     break outerloop;
                 }
             }
         }
 
-        if (allFirstNames.contains(firstName))
-            switch (allGenders.get(allFirstNames.indexOf(firstName))) {
+        if (dataset.containsKey(firstName))
+            switch (dataset.get(firstName)) {
                 case "M" -> {return "MALE";}
                 case "F" -> {return "FEMALE";}
             }
