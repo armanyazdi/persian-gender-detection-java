@@ -23,17 +23,17 @@ GenderDetector.getGender("بی بی سلطان");    // FEMALE
 GenderDetector.getGender("شیدا علیزاده");   // FEMALE
 GenderDetector.getGender("ممد رضا");        // MALE
 GenderDetector.getGender("پانته‌آ عَبّاسی");   // FEMALE
-GenderDetector.getGender("دکتر رزا حسینی"); // FEMALE
+GenderDetector.getGender("دکتر ندا حسینی"); // FEMALE
 GenderDetector.getGender("سید امیر موسوی"); // MALE
+GenderDetector.getGender("جناب آقای X");    // MALE
+GenderDetector.getGender("سرکار خانم Y");   // FEMALE
 ```
 
-Issues
-------
+## Issues
 
 Feel free to submit issues and enhancement requests.
 
-Contributing
-------------
+## Contributing
 
 Feel free to contribute names database with your kindly pull requests.
 
