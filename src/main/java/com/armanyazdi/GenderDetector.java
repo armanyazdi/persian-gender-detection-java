@@ -23,8 +23,8 @@ public class GenderDetector {
 
             for (List<String> record : records)
                 dataset.put(record.get(0), record.get(1));
-
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -52,14 +52,12 @@ public class GenderDetector {
         readCSV();
 
         outerloop:
-        for (int i = 0; i < fullName.size(); fullName.remove(fullName.size() - 1)) {
-            for (String key : dataset.keySet()) {
+        for (int i = 0; i < fullName.size(); fullName.remove(fullName.size() - 1))
+            for (String key : dataset.keySet())
                 if (key.equals(String.join(" ", fullName))) {
                     firstName = String.join(" ", fullName);
                     break outerloop;
                 }
-            }
-        }
 
         if (dataset.containsKey(firstName))
             switch (dataset.get(firstName)) {
